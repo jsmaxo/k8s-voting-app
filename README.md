@@ -16,7 +16,7 @@ This guide covers the steps to:
 
 ## Architecture
 
-![Architecture diagram](voting-app_Architecture.png)
+![Architecture diagram](Voting-app_Architecture.jpeg)
 
 ## Observability
 
