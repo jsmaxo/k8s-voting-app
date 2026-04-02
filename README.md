@@ -1,18 +1,18 @@
 # K8s Kind Voting App
 
-A comprehensive guide for setting up a Kubernetes cluster using Kind on an AWS EC2 instance, installing and configuring Argo CD, and deploying applications using Argo CD.
+## 🏗️ Application Overview and Architecture
 
-## Overview
+The voting application is composed of several distinct components:
 
-This guide covers the steps to:
-- Launch an AWS EC2 instance.
-- Install Docker and Kind.
-- Create a Kubernetes cluster using Kind.
-- Install and access kubectl.
-- Set up the Kubernetes Dashboard.
-- Install and configure Argo CD.
-- Connect and manage your Kubernetes cluster with Argo CD.
+- **Voting App**: A Python-based web application built with Flask, where users cast their votes.
 
+- **Redis**: A messaging system that collects the submitted votes.
+
+- **Worker**: A .NET application (with a Java-like code sample preserved) that processes votes and updates a PostgreSQL database.
+
+- **Result App**: A Node.js and Express application that retrieves and displays voting results from the database.
+
+Note that Redis and PostgreSQL are provided as prebuilt images from Docker Hub, while the Python, .NET, and Node.js applications are custom-developed and organized in separate folders within the repository.
 
 ## Architecture
 
@@ -20,41 +20,41 @@ This guide covers the steps to:
 
 ## Observability
 
-![Grafana diagram](grafana.png)
-![Prometheus diagram](prometheus.png)
+![Grafana diagram](Grafana_dashboard.png)
+![Prometheus diagram](prometheus_graph.png)
 
-* A front-end web app in [Python](/vote) which lets you vote between two options
-* A [Redis](https://hub.docker.com/_/redis/) which collects new votes
-* A [.NET](/worker/) worker which consumes votes and stores them in…
-* A [Postgres](https://hub.docker.com/_/postgres/) database backed by a Docker volume
-* A [Node.js](/result) web app which shows the results of the voting in real time
+## 🚀 Run the Application
+
+### 📁 Navigate to Kubernetes Configuration
+```bash
+cd k8s-specifications
+```
+### ⚙️ Apply Kubernetes Configurations
+```
+kubectl apply -f .
+```
+### 🔍 Verify Deployments
+```
+kubectl get all
+```
+### 🌐 Port Forwarding
+##### 🗳️ Vote App
+```
+kubectl port-forward svc/vote 5000:5000 --address=0.0.0.0
+```
+##### 🗳️ Result App
+```
+kubectl port-forward svc/result 5001:5001 --address=0.0.0.0
+```
+### 🌍 Access Applications in Browser
+##### 🗳️ Vote App
+```
+http://localhost:5000
+```
+##### 🗳️ Result App
+```
+http://localhost:5001
+```
 
 
-
-## Resume Description
-
-### Project Title: 
-
-Automated Deployment of Scalable Applications on AWS EC2 with Kubernetes and Argo CD
-
-### Description: 
-
-Led the deployment of scalable applications on AWS EC2 using Kubernetes and Argo CD for streamlined management and continuous integration. Orchestrated deployments via Kubernetes dashboard, ensuring efficient resource utilization and seamless scaling.
-
-### Key Technologies:
-
-* AWS EC2: Infrastructure hosting for Kubernetes clusters.
-* Kubernetes Dashboard: User-friendly interface for managing containerized applications.
-* Argo CD: Continuous Delivery tool for automated application deployments.
-
-### Achievements:
-
-Implemented Kubernetes dashboard for visual management of containerized applications on AWS EC2 instances.
-Utilized Argo CD for automated deployment pipelines, enhancing deployment efficiency by 60%.
-Achieved seamless scaling and high availability, supporting 99.9% uptime for critical applications.
-This project description emphasizes your role in leveraging AWS EC2, Kubernetes, and Argo CD to optimize application deployment and management processes effectively.
-
-
-### Aapke DevOps Wale Bhaiya
-### [TrainWithShubham](https://www.trainwithshubham.com/)
 
